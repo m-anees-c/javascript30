@@ -1,0 +1,23 @@
+.keys {
+    margin: auto;
+}
+
+.key {
+    display: inline-block;
+    border: 1px solid black;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+    transition:all 0.1s ;
+    cursor: pointer;
+}
+
+.playing {
+    border-color: aqua;
+    transform: scale(1.1);
+}
+
+.key span{
+    display: block;
+}
+
