@@ -1,23 +1,56 @@
+body {
+    background-color: #dad5d5;
+    text-align: center;
+    font-size: 16px;
+    
+}
+
+
+h1 {
+    margin-top: 20px;
+}
+
+p {
+    line-height: 1.3em;
+    max-width: 80%;
+    margin: 0 auto 10px;
+}
+
 .keys {
-    margin: auto;
+    margin: 50px 50px;
 }
 
 .key {
     display: inline-block;
     border: 1px solid black;
-    padding: 10px;
+    border-radius: 7px;
+    border: 0.1px solid rgb(177, 177, 177);
+    box-shadow: 0 4px 10px #2c3338;
+    padding: 15px 20px;
+    background-color: rgb(41, 44, 47);
+    color: #f4f4f4;
     margin: 10px;
     text-align: center;
-    transition:all 0.1s ;
+    transition:all 0.1s ease ;
     cursor: pointer;
 }
 
 .playing {
-    border-color: aqua;
+    border-color: rgb(204, 221, 221);
     transform: scale(1.1);
 }
 
-.key span{
+.key kbd {
+    font-size: 32px;
+}
+.key span {
+    font-size: 16px;
     display: block;
+    color:#dad5d5;
 }
 
+@media only screen and (max-width: 600px) {
+    .key {
+        padding: 10px 15px;
+    }
+}
