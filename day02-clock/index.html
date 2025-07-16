@@ -12,12 +12,13 @@
             font-size: 16px;
             background-color:antiquewhite;
             text-align: center;
+            font-family: 'Orbitron', sans-serif;
         }
         body {
             align-items: center;
 
             display: flex;
-            flex:1;
+            flex-direction: column;
             min-height: 100vh;
         }
 
@@ -50,6 +51,12 @@
             transform-origin: 100%;
         }
 
+        .digital-clock {
+            display: block;
+            font-size: 6rem;
+            font-weight: bold;
+       }
+
        
         @media only screen and (max-width : 600px ){
             .clock {
@@ -57,10 +64,12 @@
                 height: 150px;
             }
             
+            .digital-clock {
+                font-size: 3rem;
+            }
         }
 
        
-
     </style>
         <div class="clock">
                 
@@ -70,24 +79,26 @@
                 <div class="hand second-hand"></div>
             </div>
         </div>
+        
+        <div class="digital-clock">
+            10:10:10
+        </div>
 
         <script>
-
-
-            const clockFace = document.querySelector('.clock-face');
-
 
             const hand = document.querySelector('.hand');
             const secondHand = document.querySelector('.second-hand');
             const minuteHand = document.querySelector('.min-hand');
             const hourHand = document.querySelector('.hour-hand');
 
-           function setTime() {
+            const digitalClock = document.querySelector('.digital-clock');
+
+            function setTime() {
                     
                 date = new Date() ;
-                const second = date.getSeconds();
-                const minute = date.getMinutes();
-                const hour = date.getHours();
+                let second = date.getSeconds();
+                let minute = date.getMinutes();
+                let hour = date.getHours();
                 
                 hand.style.transition = "all 0.1s cubic-bezier(0.25, 0.1, 0.23, 3.32)";
 
@@ -95,6 +106,14 @@
                 minuteHand.style.transform = `rotate(${ (( minute / 60 ) * 360 ) + 90 }deg)` ;
                 hourHand.style.transform = `rotate(${ (( hour / 12 ) * 360 ) + 90 }deg)` ;
 
+             
+                second = second < 10 ? "0" + second : second ;
+                minute = minute < 10 ? "0" + minute : minute ;
+                hour = hour < 10 ? "0" + hour : hour ;
+
+                
+                
+                digitalClock.innerHTML = `${hour}:${minute}:${second}`;
             }
             setInterval (setTime, '1000')
         </script>
