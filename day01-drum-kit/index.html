@@ -1,104 +1,89 @@
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles.css">
     <title>Drum Kit</title>
-</head>
-<body>
+  </head>
+  <body>
     <main>
-        <h1>Drum Kit</h1>
-        <p>Tap the keys or click the pads to play the beat. This is an interactive JavaScript-powered drum machine built from scratch using only HTML, CSS, and JS. Play around and feel the rhythm!</p>
-        <div class="keys">
-            <div data-key="65" class="key" >
-                <kbd>A</kbd>
-                <span sound="clap">Clap</span>
-            </div>
-            <div data-key="83" class="key">
-                <kbd>S</kbd>
-                <span sound="clap">Hihat</span>
-            </div>
-            <div data-key="68" class="key">
-                <kbd>D</kbd>
-                <span sound="clap">Kick</span>
-            </div>
-            <div data-key="70" class="key">
-                <kbd>F</kbd>
-                <span sound="clap">Openhat</span>
-            </div>
-            <div data-key="71" class="key">
-                <kbd>G</kbd>
-                <span sound="clap">Boom</span>
-            </div>
-            <div data-key="72" class="key">
-                <kbd>H</kbd>
-                <span sound="clap">Ride</span>
-            </div>
-            <div data-key="74" class="key">
-                <kbd>J</kbd>
-                <span sound="clap">Snare</span>
-            </div>
-            <div data-key="75" class="key">
-                <kbd>K</kbd>
-                <span sound="clap">Tom</span>
-            </div>
-            <div data-key="76" class="key">
-                <kbd>L</kbd>
-                <span sound="clap">Tink</span>
-            </div>
+      <h1>Drum Kit</h1>
+      <p>Tap the keys or click the pads to play the beat. This is an interactive JavaScript-powered drum machine built from scratch using only HTML, CSS, and JS. Play around and feel the rhythm!</p>
+      <div class="keys">
+        <div data-key="65" class="key">
+          <kbd>A</kbd>
+          <span sound="clap">Clap</span>
         </div>
+        <div data-key="83" class="key">
+          <kbd>S</kbd>
+          <span sound="clap">Hihat</span>
+        </div>
+        <div data-key="68" class="key">
+          <kbd>D</kbd>
+          <span sound="clap">Kick</span>
+        </div>
+        <div data-key="70" class="key">
+          <kbd>F</kbd>
+          <span sound="clap">Openhat</span>
+        </div>
+        <div data-key="71" class="key">
+          <kbd>G</kbd>
+          <span sound="clap">Boom</span>
+        </div>
+        <div data-key="72" class="key">
+          <kbd>H</kbd>
+          <span sound="clap">Ride</span>
+        </div>
+        <div data-key="74" class="key">
+          <kbd>J</kbd>
+          <span sound="clap">Snare</span>
+        </div>
+        <div data-key="75" class="key">
+          <kbd>K</kbd>
+          <span sound="clap">Tom</span>
+        </div>
+        <div data-key="76" class="key">
+          <kbd>L</kbd>
+          <span sound="clap">Tink</span>
+        </div>
+      </div>
     </main>
-
-     <audio data-key="65" src="./sounds/clap.wav"></audio>
-  <audio data-key="83" src="./sounds/hihat.wav"></audio>
-  <audio data-key="68" src="./sounds/kick.wav"></audio>
-  <audio data-key="70" src="./sounds/openhat.wav"></audio>
-  <audio data-key="71" src="./sounds/boom.wav"></audio>
-  <audio data-key="72" src="./sounds/ride.wav"></audio>
-  <audio data-key="74" src="./sounds/snare.wav"></audio>
-  <audio data-key="75" src="./sounds/tom.wav"></audio>
-  <audio data-key="76" src="./sounds/tink.wav"></audio>
-
+    <audio data-key="65" src="./sounds/clap.wav"></audio>
+    <audio data-key="83" src="./sounds/hihat.wav"></audio>
+    <audio data-key="68" src="./sounds/kick.wav"></audio>
+    <audio data-key="70" src="./sounds/openhat.wav"></audio>
+    <audio data-key="71" src="./sounds/boom.wav"></audio>
+    <audio data-key="72" src="./sounds/ride.wav"></audio>
+    <audio data-key="74" src="./sounds/snare.wav"></audio>
+    <audio data-key="75" src="./sounds/tom.wav"></audio>
+    <audio data-key="76" src="./sounds/tink.wav"></audio>
     <script>
 
-        
+      //function for sound play
+      function playSound(keyCode) {
+        let sound = document.querySelector(`audio[data-key="${keyCode}"]`);
+        if (!sound) return;
+        let key = document.querySelector(`div[data-key="${keyCode}"]`);
+        sound.currentTime = 0;
+        sound.play();
+        key.classList.add('playing');
+      }
 
+      // remove transition when sound end
+      function removeTransition(e) {
+        if (e.propertyName !== 'transform') return;
+        this.classList.remove('playing');
+      }
 
-        function playSound(keyCode) {
-            let sound = document.querySelector(`audio[data-key="${keyCode}"]`);
-            if (!sound) return ;
-            let key = document.querySelector(`div[data-key="${keyCode}"]`);
-            sound.currentTime = 0 ;
-            sound.play();
-            key.classList.add('playing');
-
-        }
-
-        function removeTransition(e) {
-            if(e.propertyName !== 'transform') return;
-            this.classList.remove('playing');
-
-        } 
-
-       
-
-
+      // play sound when key press
+      window.addEventListener('keydown', (e) => playSound(e.keyCode));
       
-
-        
-        window.addEventListener('keydown', (e) => playSound (e.keyCode) );
-        const keys = document.querySelectorAll('.key');
-        keys.forEach(key => key.addEventListener('transitionend', removeTransition))
-        
-        
-      
-        keys.forEach(key => key.addEventListener('click', function() {
-            playSound(key.dataset.key);
-        }))
-            
-       
-
+      // play sound when click
+      const keys = document.querySelectorAll('.key');
+      keys.forEach(key => key.addEventListener('transitionend', removeTransition))
+      keys.forEach(key => key.addEventListener('click', function() {
+        playSound(key.dataset.key);
+      }))
     </script>
-    
-</body>
+  </body>
 </html>
