@@ -92,9 +92,8 @@
       // get all input elements
       const inputs = document.querySelectorAll('.controls input');
       inputs.forEach(input => {
-        // add event listeners to input elements
-        input.addEventListener("change", changeStyle); // update css variable when input value change
-        input.addEventListener("input", changeStyle); // update css variable when input range slider moves
+        // add event listeners to input elements and update styles
+        input.addEventListener("input", changeStyle);
       })
 
       // function to change CSS variable values

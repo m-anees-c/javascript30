@@ -1,9 +1,9 @@
 # CSS Variables – JavaScript30 Day 3
 
 ## About  
-This project demonstrates how to update **CSS variables dynamically using JavaScript**.  
-It allows the user to control spacing, blur, and base color of an image using input sliders and a color picker.  
-This is part of the [JavaScript30](https://javascript30.com) challenge by [Wes Bos](https://github.com/wesbos).
+This project demonstrates how to dynamically update **CSS variables using JavaScript**.  
+Users can control **image spacing**, **blur effect**, and **base color** in real-time using input sliders and a color picker.  
+The project is part of the [JavaScript30](https://javascript30.com) challenge by [Wes Bos](https://github.com/wesbos).
 
 ## Features
 
@@ -11,14 +11,16 @@ This is part of the [JavaScript30](https://javascript30.com) challenge by [Wes B
 - Controls for:
   - Image spacing  
   - Image blur  
-  - Base color    
+  - Base color  
+- **Displays current values** next to sliders  
+- **Reset button** to restore default values  
+
 
 ## What I Learned
 
-- Using CSS variables (`--variable-name`) in styles  
-- Accessing and updating CSS variables via JavaScript  
-- Handling `input` events for range sliders and color pickers  
-- Applying `data-*` attributes for flexible input handling
+- Using and updating CSS variables (`--variable-name`) dynamically  
+- Handling `input` events for sliders and color pickers  
+
 
 ## Live Demo
 
