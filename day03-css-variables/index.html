@@ -53,16 +53,20 @@
     </div>
     <img src="./image.jpg" alt="Birds" />
     <script>
+      // get all input elements
       const inputs = document.querySelectorAll('.controls input');
       inputs.forEach(input => {
-        input.addEventListener("change", changeStyle);
+        // add event listeners to input elements
+        input.addEventListener("change", changeStyle); // update css variable when input value change
+        input.addEventListener("mousemove", changeStyle); // update css variable when input range slider moves
       })
 
+      // function to change CSS variable values
       function changeStyle() {
-        newVlaue = this.value;
-        prefix = this.dataset.sizing || '';
-        propertyName = this.name;
-        document.documentElement.style.setProperty(`--${propertyName}`, `${newVlaue + prefix}`);
+        newVlaue = this.value; // get selected value
+        prefix = this.dataset.sizing || ''; // get size unit or make it default empty string
+        propertyName = this.name; // get variable name to update
+        document.documentElement.style.setProperty(`--${propertyName}`, `${newVlaue + prefix}`); // update variable value
       }
     </script>
   </body>
