@@ -1,0 +1,69 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Variables</title>
+    <style>
+      :root {
+        --spacing: 10px;
+        --blur: 0px;
+        --base: #2f0ec1;
+      }
+
+      body {
+        width: 80vw;
+        height: 100vh;
+        margin: auto;
+        background-color: antiquewhite;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+
+      .hl {
+        color: var(--base);
+      }
+
+      .controls {
+        margin: 20px 0;
+      }
+
+      img {
+        width: 80%;
+        height: auto;
+        padding: var(--spacing);
+        background-color: var(--base);
+        filter: blur(var(--blur));
+        box-shadow: 0 4px 10px rgb(72, 58, 41);
+      }
+    </style>
+  </head>
+  <body>
+    <h2>CSS Variables and <span class="hl">Javascript</span>
+    </h2>
+    <div class="controls">
+      <label for="spacing">Spacing:</label>
+      <input type="range" id="spacing" name="spacing" data-sizing="px" min="10" max="250" value="10" />
+      <label for="blur">Blur:</label>
+      <input type="range" id="blur" name="blur" min="0" max="25" data-sizing="px" value="0" />
+      <label for="base">Base Color:</label>
+      <input type="color" name="base" id="base" value="#2f0ec1" />
+    </div>
+    <img src="./image.jpg" alt="Birds" />
+    <script>
+      const inputs = document.querySelectorAll('.controls input');
+      inputs.forEach(input => {
+        input.addEventListener("change", changeStyle);
+      })
+
+      function changeStyle() {
+        newVlaue = this.value;
+        prefix = this.dataset.sizing || '';
+        propertyName = this.name;
+        document.documentElement.style.setProperty(`--${propertyName}`, `${newVlaue + prefix}`);
+      }
+    </script>
+  </body>
+</html>
