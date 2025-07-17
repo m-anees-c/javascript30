@@ -7,7 +7,7 @@
       :root {
         --spacing: 10px;
         --blur: 0px;
-        --base: #2f0ec1;
+        --base: #757575;
       }
 
       body {
@@ -26,8 +26,14 @@
         color: var(--base);
       }
 
+      label {
+        display: inline-block;
+        margin-left: 20px;
+        margin-top: 5px;
+      }
       .controls {
         margin: 20px 0;
+        max-width: 90%;
       }
 
       img {
@@ -61,12 +67,20 @@
     </h2>
     <!-- Controls -->
     <div class="controls">
-      <label for="spacing">Spacing:</label>
-      <input type="range" id="spacing" name="spacing" data-sizing="px" min="10" max="250" value="10" />
-      <label for="blur">Blur:</label>
-      <input type="range" id="blur" name="blur" min="0" max="25" data-sizing="px" value="0" />
-      <label for="base">Base Color:</label>
-      <input type="color" name="base" id="base" value="#2f0ec1" />
+      <label for="spacing">Spacing:
+        <input type="range" id="spacing" name="spacing" data-sizing="px" min="10" max="250" value="10" />
+        <span class="value">10px</span>
+      </label>
+      
+      <label for="blur">Blur:
+        <input type="range" id="blur" name="blur" min="0" max="25" data-sizing="px" value="0" />
+        <span class="value">0px</span>
+      </label>
+      
+      <label for="base">Base Color:
+        <input type="color" name="base" id="base" value="#757575" />
+      </label>
+      
     </div>
     <!-- Image to change styles dynamically -->
     <img src="./image.jpg" alt="Birds" />
@@ -80,7 +94,7 @@
       inputs.forEach(input => {
         // add event listeners to input elements
         input.addEventListener("change", changeStyle); // update css variable when input value change
-        input.addEventListener("mousemove", changeStyle); // update css variable when input range slider moves
+        input.addEventListener("input", changeStyle); // update css variable when input range slider moves
       })
 
       // function to change CSS variable values
@@ -89,18 +103,44 @@
         prefix = this.dataset.sizing || ''; // get size unit or make it default empty string
         propertyName = this.name; // get variable name to update
         document.documentElement.style.setProperty(`--${propertyName}`, `${newVlaue + prefix}`); // update variable value
+       
+        // display current input value
+        displayInputValue()
+      }
+
+     
+
+      // function to display input value
+      function displayInputValue() {
+        // get css variable values
+        let spacingValue = getComputedStyle(document.documentElement).getPropertyValue('--spacing');
+        let blurValue = getComputedStyle(document.documentElement).getPropertyValue('--blur');
+        
+        // update input value texts
+        document.getElementById('spacing').parentElement.querySelector('.value').textContent = spacingValue ;
+        document.getElementById('blur').parentElement.querySelector('.value').textContent = blurValue ;
       }
 
       // get reset button
       const resetButton = document.querySelector('.reset');
       // Update CSS variables to default on reset button click
       resetButton.addEventListener("click",function(){
+        // reset css variables
         document.documentElement.style.setProperty('--spacing','10px');
         document.documentElement.style.setProperty('--blur','0px');
-        document.documentElement.style.setProperty('--base','#2f0ec1');
+        document.documentElement.style.setProperty('--base','#757575');
+
+        // reset input values
+        document.getElementById('spacing').value = '10';
+        document.getElementById('blur').value = '0';
+        document.getElementById('base').value = '#757575';
+
+        // display reseted input value
+        displayInputValue();
+
       })
 
-      
+
     </script>
   </body>
 </html>
