@@ -11,8 +11,8 @@
       }
 
       body {
-        width: 80vw;
-        height: 100vh;
+        min-width: 80vw;
+        min-height: 100vh;
         margin: auto;
         background-color: antiquewhite;
         display: flex;
@@ -38,11 +38,28 @@
         filter: blur(var(--blur));
         box-shadow: 0 4px 10px rgb(72, 58, 41);
       }
+      .reset {
+        position: fixed;
+        bottom: 5%;
+        right: 3%;
+        background-color: rgb(51, 50, 49);
+        border-radius: 5px;
+        color: antiquewhite;
+        height: 40px;
+        width: 100px;
+        border: 1px solid black;
+        font-size: 1.1rem;
+        box-shadow: 1px 3px 5px rgb(39, 39, 39);
+        cursor: pointer;
+      }
     </style>
   </head>
   <body>
+
+
     <h2>CSS Variables and <span class="hl">Javascript</span>
     </h2>
+    <!-- Controls -->
     <div class="controls">
       <label for="spacing">Spacing:</label>
       <input type="range" id="spacing" name="spacing" data-sizing="px" min="10" max="250" value="10" />
@@ -51,7 +68,12 @@
       <label for="base">Base Color:</label>
       <input type="color" name="base" id="base" value="#2f0ec1" />
     </div>
+    <!-- Image to change styles dynamically -->
     <img src="./image.jpg" alt="Birds" />
+    <!-- Reset Button to change CSS variables to default -->
+    <button class="reset">Reset</button>
+
+
     <script>
       // get all input elements
       const inputs = document.querySelectorAll('.controls input');
@@ -68,6 +90,17 @@
         propertyName = this.name; // get variable name to update
         document.documentElement.style.setProperty(`--${propertyName}`, `${newVlaue + prefix}`); // update variable value
       }
+
+      // get reset button
+      const resetButton = document.querySelector('.reset');
+      // Update CSS variables to default on reset button click
+      resetButton.addEventListener("click",function(){
+        document.documentElement.style.setProperty('--spacing','10px');
+        document.documentElement.style.setProperty('--blur','0px');
+        document.documentElement.style.setProperty('--base','#2f0ec1');
+      })
+
+      
     </script>
   </body>
 </html>
