@@ -3,8 +3,145 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Array 01</title>
+    <style>
+        body {
+            background-color: antiquewhite;
+            text-align: center;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 16px;
+            margin: 30px auto;
+        }
+
+        header {
+            max-width: 80%;
+            margin: 10px auto;
+        }
+
+        header h1 {
+            margin-bottom: 0;
+        }
+
+        table {
+            display: block;
+            table-layout: fixed;
+            text-align: left;
+            max-width: 467px;
+            margin: 0 auto;
+            border: 2px solid rgb(71, 70, 65);
+            border-collapse: collapse;
+            box-shadow: 0 4px 10px black;
+            overflow-x: auto;
+        }
+        th, td {
+            padding:5px 20px;
+            border: 2px solid #bab4b4;
+        }
+
+        th {
+            background-color: rgb(71, 70, 65);
+            color: aliceblue;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: rgb(71, 70, 65);
+            color: aliceblue;
+        }
+
+        caption {
+            font-size: 1.1rem;
+            font-weight: bold;
+            padding: 10px;
+        }
+
+        .buttons {
+            display: flex;
+            overflow-x: auto;
+            margin-top: 20px;
+            height: 70px;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 10px;;
+        }
+
+        .buttons button {
+            flex-shrink: 0;
+            height: 50px;
+            padding: 10px 5px;
+            background-color: black;
+            color: antiquewhite;
+            border: 2px solid aliceblue;
+            border-radius:4px;
+            box-shadow: 0 4px 5px black;
+            transition: all 0.2s ease;
+        }
+
+        .buttons button:hover {
+            transform: scale(1.05);
+        }
+
+        #resultTable, #resultText {
+            display: none;
+            overflow-x: auto;
+        }
+
+        #resultText {
+            margin-top: 20px;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        #resultText span {
+            text-decoration: underline;
+        }
+
+    </style>
 </head>
 <body>
+    <header>
+        <h1>Array Cardio 01 - Interactive Demo</h1>
+        <p>This project demonstrates various array methods like filter, map, sort, and reduce using the inventors dataset.</p>
+    </header>    
+    <div class="container">
+        <table id="inventorsTable">
+            <caption>Initial Inventors Data (Array of objects)</caption>
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Born</th>
+                    <th>Passed</th>
+                </tr>
+                <tbody id="inventorsTableBody"></tbody>
+            </thead>
+        </table>
+    </div>
+    <div class="buttons">
+        <button id="filter1500s">Filter (Born in 1500's)</button>
+        <button id="mapNames">Map (First Name & Last Name)</button>
+        <button id="sortByBirthYear">Sort by birsth year (oldest to youngest)</button>
+        <button id="countTotalYears">Count total years all lived using reduce()</button>
+        <button id="sortByYearsLived">Sort inventors by years lived</button>
+        <button id="sortByLastName">Sort the inventors alphabetically by last name</button>
+    </div>
+
+    <div class="result">
+        <h2>Results</h2>
+        <table id="resultTable">
+            <caption id="resultCaption"></caption>
+            <thead id="resultTableHead">
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Born</th>
+                    <th>Passed</th>
+                </tr>
+            </thead>
+            <tbody id="resultTableBody"></tbody>
+        </table>
+
+        <div id="resultText"></div>
+    </div>
+
     <script>
     
 
@@ -23,54 +160,125 @@
       { first: 'Hanna', last: 'Hammarström', year: 1829, passed: 1909 }
     ];
 
-    const people = [
-      'Bernhard, Sandra', 'Bethea, Erin', 'Becker, Carl', 'Bentsen, Lloyd', 'Beckett, Samuel', 'Blake, William', 'Berger, Ric', 'Beddoes, Mick', 'Beethoven, Ludwig',
-      'Belloc, Hilaire', 'Begin, Menachem', 'Bellow, Saul', 'Benchley, Robert', 'Blair, Robert', 'Benenson, Peter', 'Benjamin, Walter', 'Berlin, Irving',
-      'Benn, Tony', 'Benson, Leana', 'Bent, Silas', 'Berle, Milton', 'Berry, Halle', 'Biko, Steve', 'Beck, Glenn', 'Bergman, Ingmar', 'Black, Elk', 'Berio, Luciano',
-      'Berne, Eric', 'Berra, Yogi', 'Berry, Wendell', 'Bevan, Aneurin', 'Ben-Gurion, David', 'Bevel, Ken', 'Biden, Joseph', 'Bennington, Chester', 'Bierce, Ambrose',
-      'Billings, Josh', 'Birrell, Augustine', 'Blair, Tony', 'Beecher, Henry', 'Biondo, Frank'
-    ];
     
+    // generate initial table details from array
+    let inventorsTable = inventors.map(inventor => {
+        return `<tr><td>${inventor.first}</td><td>${inventor.last}</td><td>${inventor.year}</td><td>${inventor.passed}</td></tr>`
+    }).join('');
+    let inventorTableBody = document.getElementById('inverntorsTableBody');
+    inventorsTableBody.innerHTML = inventorsTable;
+
+    const filter1500s = document.getElementById("filter1500s");
+    const mapNames = document.getElementById("mapNames");
+    const sortByBirthYear = document.getElementById("sortByBirthYear");
+    const countTotalYears = document.getElementById("countTotalYears");
+    const sortByYearsLived = document.getElementById("sortByYearsLived");
+    const sortByLastName = document.getElementById("sortByLastName");
+    const resultTable = document.getElementById("resultTable");
+    const resultTableBody = document.getElementById("resultTableBody");
+    const resultTableHead = document.getElementById("resultTableHead");
+    const resultCaption = document.getElementById("resultCaption");
+    const resultText = document.getElementById("resultText");
+
+
+    // function to display / hide resultTable and resultText
+    function displayResult(element){
+        if(element === "table"){
+            resultTable.style.display = "inline-block";
+            resultText.style.display = "none";
+        } else {
+            resultTable.style.display = "none";
+            resultText.style.display = "inline-block";
+        }
+    }
+
+
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
 
-    let inventors1500 = inventors.filter(inventor => (inventor.year >= 1500 && inventor.year < 1600));
-    
-    console.log("List of inventors for those who were born in the 1500's");
-    console.table(inventors1500);
+    filter1500s.addEventListener("click", function(){
+        // filter array
+        let inventors1500s = inventors.filter(inventor => (inventor.year >= 1500 && inventor.year < 1600));
+        
+        resultCaption.innerHTML = "Inventors Born in the 1500s";
+        // generate table details
+        tableBody = inventors1500s.map(inventor => {
+            return `<tr><td>${inventor.first}</td><td>${inventor.last}</td><td>${inventor.year}</td><td>${inventor.passed}</td></tr>`
+         }).join('');
+        
+        resultTableBody.innerHTML = tableBody;
+        displayResult("table");
+    })
+
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors first and last names
 
-    let fullNames = inventors.map(function(inventor){
-        return `${inventor.first} ${inventor.last}`
+    mapNames.addEventListener("click", function(){
+        let fullNames = inventors.map(function(inventor){
+         return `${inventor.first} ${inventor.last}`
+        })
+
+        names = fullNames.map(fullname => {
+            return `"${fullname}", `
+         }).join('');
+
+        resultText.innerHTML = `List of the inventors first and last names: ${names}`;
+        displayResult("text");
     })
 
-    console.log("array of the inventors first and last names");
-    console.table(fullNames);
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
 
-    inventors.sort((currentPerson, nextPerson) => currentPerson.year - nextPerson.year);
-    console.table(inventors);
+
+    sortByBirthYear.addEventListener("click", function(){
+        // sort array
+        inventors.sort((currentPerson, nextPerson) => currentPerson.year - nextPerson.year);
+        
+        resultCaption.innerHTML = "Sorted by birth year, oldest to youngest"
+        // generate table details
+        let tableBody = inventors.map(inventor => {
+            return `<tr><td>${inventor.first}</td><td>${inventor.last}</td><td>${inventor.year}</td><td>${inventor.passed}</td></tr>`
+        }).join('');
+
+        resultTableBody.innerHTML = tableBody;
+        displayResult("table");
+    })
+
 
     // Array.prototype.reduce()
-    // 4. How many years did all the inventors live all together?
+    // 4. How many years did all the inventors live all together
 
-    let lives = inventors.reduce((lives,inventor) => lives + ( inventor.passed - inventor.year),0);
-    console.log("total years all the inventors lived all together")
-    console.log(lives);
+    countTotalYears.addEventListener("click", function(){
+        let totalYears = inventors.reduce((years,inventor) => years + ( inventor.passed - inventor.year),0);
+        resultText.innerHTML = `Total years all the inventors lived all together: <span>${totalYears} years</span>`;
+        
+        displayResult("text");
+    })
+
 
     // 5. Sort the inventors by years lived
 
-    inventors.sort((currentPerson,nextPerson) => {
-        currentPersonLifeSpan = currentPerson.passed - currentPerson.year ;
-        nextPersonLifeSpan = nextPerson.passed - nextPerson.year ;
-        return currentPersonLifeSpan > nextPersonLifeSpan ? 1 : -1 ;
+    sortByYearsLived.addEventListener("click", function(){
+        //sort array
+        inventors.sort((currentPerson,nextPerson) => {
+            currentPersonLifeSpan = currentPerson.passed - currentPerson.year ;
+            nextPersonLifeSpan = nextPerson.passed - nextPerson.year ;
+            return currentPersonLifeSpan > nextPersonLifeSpan ? 1 : -1 ;
+        });
+
+        resultCaption.innerHTML = "Sortd by years lived"
+        // generate table details
+        let tableBody = inventors.map(inventor => {
+            return `<tr><td>${inventor.first}</td><td>${inventor.last}</td><td>${inventor.year}</td><td>${inventor.passed}</td></tr>`
+        }).join('');
+
+        resultTableBody.innerHTML = tableBody;
+        displayResult("table");
+
     })
-    console.log("Inventors sorted by years lived")
-    console.table(inventors);
+
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
@@ -85,15 +293,27 @@
         */
 
     // 7. sort Exercise
-    // Sort the people alphabetically by last name
+    // Sort the inventors alphabetically by last name
 
-    inventors.sort((currentPerson,nextPerson) => {
-        currentPersonLastName = currentPerson.last;
-        nextPersonLastName = nextPerson.last;
-        return currentPersonLastName > nextPersonLastName ? 1 : -1 ;
-    });
-    console.log("Sorted alphabetically by last name");
-    console.table(inventors);
+    sortByLastName.addEventListener("click", function(){
+        // sort array
+        inventors.sort((currentPerson,nextPerson) => {
+            currentPersonLastName = currentPerson.last;
+            nextPersonLastName = nextPerson.last;
+            return currentPersonLastName > nextPersonLastName ? 1 : -1 ;
+        });
+        
+        resultCaption.innerHTML = "Sorted alphabetically by last name"
+        // generate table details
+        let tableBody = inventors.map(inventor => {
+            return `<tr><td>${inventor.first}</td><td>${inventor.last}</td><td>${inventor.year}</td><td>${inventor.passed}</td></tr>`
+        }).join('');
+
+        resultTableBody.innerHTML = tableBody;
+        displayResult("table");
+
+    })
+
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
