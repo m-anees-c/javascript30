@@ -1,0 +1,54 @@
+      :root {
+        --spacing: 10px;
+        --blur: 0px;
+        --base: #757575;
+      }
+
+      body {
+        min-width: 80vw;
+        min-height: 100vh;
+        margin: auto;
+        background-color: antiquewhite;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+
+      .hl {
+        color: var(--base);
+      }
+
+      label {
+        display: inline-block;
+        margin-left: 20px;
+        margin-top: 5px;
+      }
+      .controls {
+        margin: 20px 0;
+        max-width: 90%;
+      }
+
+      img {
+        width: 80%;
+        height: auto;
+        padding: var(--spacing);
+        background-color: var(--base);
+        filter: blur(var(--blur));
+        box-shadow: 0 4px 10px rgb(72, 58, 41);
+      }
+      .reset {
+        position: fixed;
+        bottom: 5%;
+        right: 3%;
+        background-color: rgb(51, 50, 49);
+        border-radius: 5px;
+        color: antiquewhite;
+        height: 40px;
+        width: 100px;
+        border: 1px solid black;
+        font-size: 1.1rem;
+        box-shadow: 1px 3px 5px rgb(39, 39, 39);
+        cursor: pointer;
+      }
