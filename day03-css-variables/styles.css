@@ -16,6 +16,11 @@
         text-align: center;
       }
 
+      header {
+        max-width: 80%;
+        margin: 10px auto;
+      }
+
       .hl {
         color: var(--base);
       }
