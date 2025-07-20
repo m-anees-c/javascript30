@@ -72,6 +72,7 @@ function displayMatches(){
             console.log(popupContent);
             popupContent.innerHTML = popupContentHTML;
             popup.style.display = "block";
+            document.body.style.overflow = "hidden";
         })
     })
 }
@@ -84,6 +85,8 @@ const closeButoon = document.querySelector('.close-button');
 // popup close button event 
 closeButoon.addEventListener("click", function(){
     popup.style.display = "none";
+    document.body.style.overflow = "";
+
 })
 
 // select suggestions ul and search input element
