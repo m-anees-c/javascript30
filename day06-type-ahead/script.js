@@ -53,7 +53,7 @@ function displayMatches(){
         list.addEventListener("click", function(){
             let place = matchedPlaces[index];
             let city = place.city;
-            let growth = place.growth;
+            let growth = place.growth_from_2000_to_2013;
             let latitude = place.latitude;
             let longitude = place.longitude;
             let population = place.population;
