@@ -8,7 +8,6 @@ fetch(endpoint)
             .then(data => {
                 cities.push(...data)
             });
-            console.log(cities);
 
 // function to format numbers with commas
 function formatNumber(num) {
@@ -69,7 +68,6 @@ function displayMatches(){
                                     <li><strong>Rank:</strong> ${rank}</li>
                                     <li><strong>State:</strong> ${state}</li>
                                 </ul>`;
-            console.log(popupContent);
             popupContent.innerHTML = popupContentHTML;
             popup.style.display = "block";
             document.body.style.overflow = "hidden";
