@@ -25,6 +25,8 @@ function findMatches(wordToMatch, cities){
     });
 }
 
+
+
 // function to dsiplay matched places
 function displayMatches(){
 
@@ -34,11 +36,11 @@ function displayMatches(){
     let matchedPlaces = findMatches(wordToMatch, cities);
 
     // get html lists elements as string
-    lists = matchedPlaces.map(place => {
+    lists = matchedPlaces.map((place, index) => {
         // add span with class = "hl" to searchInput to highlight
         let cityName = place.city.replace(regex,`<span class="hl">${wordToMatch}</span>`)
         let stateName = place.state.replace(regex,`<span class="hl">${wordToMatch}</span>`)
-        return `<li>
+        return `<li data-index="${index}">
             <span class="name">${cityName}, ${stateName}</span>
             <span class="population">${formatNumber(place.population)}</span>
             </li>`
@@ -46,7 +48,43 @@ function displayMatches(){
 
     // set list elements inside suggestions ul
     suggestions.innerHTML = lists;
+    
+    let results = suggestions.querySelectorAll('li');
+    results.forEach((list,index) => {
+        list.addEventListener("click", function(){
+            let place = matchedPlaces[index];
+            let city = place.city;
+            let growth = place.growth;
+            let latitude = place.latitude;
+            let longitude = place.longitude;
+            let population = place.population;
+            let rank = place.rank;
+            let state = place.state;
+            let popupContentHTML =  `<ul>
+                                    <li><strong>City:</strong> ${city}</li>
+                                    <li><strong>Growth (2000 - 2013):</strong> ${growth}</li>
+                                    <li><strong>Latitude:</strong> ${latitude}</li>
+                                    <li><strong>Longitude:</strong> ${longitude}</li>
+                                    <li><strong>Population:</strong> ${population}</li>
+                                    <li><strong>Rank:</strong> ${rank}</li>
+                                    <li><strong>State:</strong> ${state}</li>
+                                </ul>`;
+            console.log(popupContent);
+            popupContent.innerHTML = popupContentHTML;
+            popup.style.display = "block";
+        })
+    })
 }
+
+// select popup elements
+const popup = document.querySelector('.popup');
+const popupContent = document.querySelector('.popup-content');
+const closeButoon = document.querySelector('.close-button');
+
+// popup close button event 
+closeButoon.addEventListener("click", function(){
+    popup.style.display = "none";
+})
 
 // select suggestions ul and search input element
 const suggestions = document.querySelector('.suggestions');

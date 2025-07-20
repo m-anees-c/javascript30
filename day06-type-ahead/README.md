@@ -2,25 +2,25 @@
 
 ## About
 This project is part of the [JavaScript30](https://javascript30.com) challenge by [Wes Bos](https://github.com/wesbos).  
-It demonstrates a live search feature that filters through a dataset of **cities and states**.  
-As the user types, matching results are displayed dynamically, with the search term highlighted.
-
+It implements a live, client-side search that filters a dataset of **US cities and states**.  
+Results update as the user types, with matching text highlighted and an optional detail popup for each result.
 
 ## Features
-- Fetches a dataset of **US cities** using `fetch()`.
-- Filters and displays city/state names that match the search query.
-- Highlights the matching text inside city/state names.
-
+- Fetches and caches a dataset of US cities via `fetch()`
+- Live filtering as the user types (case-insensitive)
+- Highlights matched substrings in city and state names
+- Click a result to view a **popup** with detailed city info (growth, lat/long, population, rank)
 
 ## What I Learned
-- Using `fetch()` to retrieve and parse JSON data.
-- Applying `filter()` and regular expressions (`RegExp`)for dynamic search.
-- Manipulating the DOM to display filtered results.
-- Adding **event listeners** for live updates (e.g., `input` events).
-
+- Using `fetch()` and spreading fetched data into a local array
+- Building dynamic, regex-based filtering with `RegExp(..., 'gi')`
+- Highlighting matched substrings by wrapping them in span elements
+- Formatting large numbers using a regex replacement
+- Attaching event listeners to dynamically generated list items
+- Managing a simple popup (show/hide) pattern with JavaScript and class/state control
 
 ## Dataset
-The project uses the [US Cities dataset](https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json) containing:
+The project uses the public [US Cities dataset](https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json) containing objects like:
 ```json
 {
   "city": "New York",

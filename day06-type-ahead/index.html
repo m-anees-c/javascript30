@@ -1,18 +1,31 @@
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="./styles.css">
-</head>
-<body>
-    <form class="search-form">
-        <input type="text" class="search" placeholder="City or State">
-        <ul class="suggestions">
-            <li>Filter for a city</li>
-            <li>or a state</li>
-        </ul>
-    </form>
-    <script src="./script.js"></script>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Type Ahead</title>
+        <link rel="stylesheet" href="./styles.css">
+    </head>
+    <body>
+        <form class="search-form">
+            <input type="text" class="search" placeholder="Type City or State">
+            <ul class="suggestions">
+            </ul>
+        </form>
+        <div class="popup">
+            <div class="popup-content">
+                <ul>
+                <li><strong>City:</strong> New York</li>
+                <li><strong>Growth (2000 - 2013):</strong> 4.8%</li>
+                <li><strong>Latitude:</strong> 40.7127837</li>
+                <li><strong>Longitude:</strong> -74.0059413</li>
+                <li><strong>Population:</strong> 8,405,837</li>
+                <li><strong>Rank:</strong> 1</li>
+                <li><strong>State:</strong> New York</li>
+            </ul>
+            </div>
+            <button class="close-button">close</button>
+        </div>
+        
+        <script src="./script.js"></script>
+    </body>
 </html>
