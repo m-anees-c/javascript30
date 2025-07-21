@@ -66,6 +66,9 @@
     // find index
     let index = comments.findIndex(comment => comment.id === 823423)
     
+    console.log("\n%cIndex of comment with the ID of 823423",subHeaderStyle);
+    console.log(index);
+
     // creating new excluding index element 
     let newComments = [
         ...comments.slice(0,index),
