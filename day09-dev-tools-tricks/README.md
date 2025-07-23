@@ -16,4 +16,4 @@ It demonstrates advanced **console methods** in the browser's DevTools, which he
 
 
 ## Live Demo
-[View the Live Project](https://m-anees-c.github.io/javascript30/day09-dev-tool-tricks/)
+[View the Live Project](https://m-anees-c.github.io/javascript30/day09-dev-tools-tricks/)
