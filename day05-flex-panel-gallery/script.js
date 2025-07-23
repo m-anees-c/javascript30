@@ -1,8 +1,8 @@
 // get all panels
 const panels = document.querySelectorAll(".panel");
-    panels.forEach(panel => {
-        panel.addEventListener("click", function() {
-        
+panels.forEach(panel => {
+    panel.addEventListener("click", function() {
+
         // toglle 'open' class to clicked panel
         panel.classList.toggle("open");
 
@@ -15,13 +15,13 @@ const panels = document.querySelectorAll(".panel");
                 opnedPanel.classList.remove('open');
             }
         });
-            
-        
-        });
-        panel.addEventListener("transitionend", (e) => {
-            // after flex transition toggle 'open-active' class
-            if (e.propertyName.includes("flex")) {
-                panel.classList.toggle("open-active");
-            }
-        });
-    })
+
+
+    });
+    panel.addEventListener("transitionend", (e) => {
+        // after flex transition toggle 'open-active' class
+        if (e.propertyName.includes("flex")) {
+            panel.classList.toggle("open-active");
+        }
+    });
+})

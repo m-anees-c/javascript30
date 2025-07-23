@@ -4,21 +4,21 @@ const cities = [];
 
 // fetch cities
 fetch(endpoint)
-            .then(response => response.json())
-            .then(data => {
-                cities.push(...data)
-            });
+    .then(response => response.json())
+    .then(data => {
+        cities.push(...data)
+});
 
 // function to format numbers with commas
 function formatNumber(num) {
-  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 // function to find matches
 function findMatches(wordToMatch, cities){
-    
+
     let regex = new RegExp(wordToMatch,'gi');
-    
+
     return cities.filter(place => {
         return place.city.match(regex) || place.state.match(regex);
     });
@@ -36,41 +36,41 @@ function displayMatches(){
 
     // get html lists elements as string
     lists = matchedPlaces.map((place, index) => {
-        // add span with class = "hl" to searchInput to highlight
-        let cityName = place.city.replace(regex,`<span class="hl">${wordToMatch}</span>`)
-        let stateName = place.state.replace(regex,`<span class="hl">${wordToMatch}</span>`)
-        return `<li data-index="${index}">
-            <span class="name">${cityName}, ${stateName}</span>
-            <span class="population">${formatNumber(place.population)}</span>
-            </li>`
+    // add span with class = "hl" to searchInput to highlight
+    let cityName = place.city.replace(regex,`<span class="hl">${wordToMatch}</span>`)
+    let stateName = place.state.replace(regex,`<span class="hl">${wordToMatch}</span>`)
+    return `<li data-index="${index}">
+        <span class="name">${cityName}, ${stateName}</span>
+        <span class="population">${formatNumber(place.population)}</span>
+        </li>`
     }).join("");
 
     // set list elements inside suggestions ul
     suggestions.innerHTML = lists;
-    
+
     let results = suggestions.querySelectorAll('li');
     results.forEach((list,index) => {
         list.addEventListener("click", function(){
-            let place = matchedPlaces[index];
-            let city = place.city;
-            let growth = place.growth_from_2000_to_2013;
-            let latitude = place.latitude;
-            let longitude = place.longitude;
-            let population = place.population;
-            let rank = place.rank;
-            let state = place.state;
-            let popupContentHTML =  `<ul>
-                                    <li><strong>City:</strong> ${city}</li>
-                                    <li><strong>Growth (2000 - 2013):</strong> ${growth}</li>
-                                    <li><strong>Latitude:</strong> ${latitude}</li>
-                                    <li><strong>Longitude:</strong> ${longitude}</li>
-                                    <li><strong>Population:</strong> ${population}</li>
-                                    <li><strong>Rank:</strong> ${rank}</li>
-                                    <li><strong>State:</strong> ${state}</li>
-                                </ul>`;
-            popupContent.innerHTML = popupContentHTML;
-            popup.style.display = "block";
-            document.body.style.overflow = "hidden";
+        let place = matchedPlaces[index];
+        let city = place.city;
+        let growth = place.growth_from_2000_to_2013;
+        let latitude = place.latitude;
+        let longitude = place.longitude;
+        let population = place.population;
+        let rank = place.rank;
+        let state = place.state;
+        let popupContentHTML =  `<ul>
+            <li><strong>City:</strong> ${city}</li>
+            <li><strong>Growth (2000 - 2013):</strong> ${growth}</li>
+            <li><strong>Latitude:</strong> ${latitude}</li>
+            <li><strong>Longitude:</strong> ${longitude}</li>
+            <li><strong>Population:</strong> ${population}</li>
+            <li><strong>Rank:</strong> ${rank}</li>
+            <li><strong>State:</strong> ${state}</li>
+            </ul>`;
+        popupContent.innerHTML = popupContentHTML;
+        popup.style.display = "block";
+        document.body.style.overflow = "hidden";
         })
     })
 }
@@ -84,7 +84,6 @@ const closeButoon = document.querySelector('.close-button');
 closeButoon.addEventListener("click", function(){
     popup.style.display = "none";
     document.body.style.overflow = "";
-
 })
 
 // select suggestions ul and search input element
