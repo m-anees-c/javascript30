@@ -14,4 +14,4 @@ It demonstrates how to access the **user’s webcam**, display a **live video fe
 
 
 ## Live Demo  
-[View the Live Project](https://m-anees-c.github.io/javascript30/day18-adding-up-times-with-reduce/)
+[View the Live Project](https://m-anees-c.github.io/javascript30/day19-webcam-fun/)
