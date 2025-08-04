@@ -1,0 +1,54 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geolocation</title>
+</head>
+<style>
+    body {
+    margin: 0 auto;
+    width: 80%;
+    align-content: center;
+    background-color: blanchedalmond;
+    color: #363333;
+    font-size: 16px;
+}
+
+code {
+  color: white;
+  background-color: #4b4949;
+  border-radius: 3px;
+  font-family: courier, monospace;
+  padding: 0 3px;
+}
+
+p {
+    font-style: italic;
+    font-size: 1.1em;
+}
+
+.location {
+    font-weight: bold;
+    font-style: normal;
+    text-align: center;
+}
+</style>
+<body>
+    <div class="about">
+        <h1>About</h1>
+        <p>This Geolocation project uses the browser's built-in <code>navigator.geolocation</code> API to access the user's current location and display their latitude and longitude.</p>
+        <p>Make sure to allow location access when prompted.</p>
+    </div>
+
+    <script>
+        const about = document.querySelector('.about');
+        const loc = document.createElement('p');
+        loc.classList.add('location');
+        navigator.geolocation.getCurrentPosition((position) => {
+            loc.innerHTML = `Latitude : ${position.coords.latitude}, Longitude : ${position.coords.longitude}`;
+            about.appendChild(loc);
+        });
+       
+    </script>
+</body>
+</html>
