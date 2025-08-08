@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Event Capture, Propagation, Bubbling, and Once</title>
+</head>
+<body class="bod">
+
+  <div class="one">
+    <div class="two">
+      <div class="three">
+      </div>
+    </div>
+  </div>
+
+<style>
+  html {
+    box-sizing: border-box;
+  }
+
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
+
+  div {
+    width: 100%;
+    padding: 100px;
+  }
+
+  .one {
+    background: thistle;
+  }
+
+  .two {
+    background: mistyrose;
+    padding: 50px;
+  }
+
+  .three {
+    background: coral;
+    padding: 25px;
+  }
+  button{
+    display: flex;
+    width: 40%;
+    justify-self: center;
+    justify-content: center;
+    align-items: center;
+    background-color: antiquewhite;
+    height: 30px;
+    border-radius: 7px;
+    margin-top: 10px;
+  }
+</style>
+
+<button>Click Me and check Console</button>
+<script>
+    const divs = document.querySelectorAll('div');
+
+    function display(e){
+        console.log(this.classList.value);
+        e.stopPropagation();
+    }
+
+    divs.forEach(div => div.addEventListener('click',display,{
+        capture: false
+    }));
+
+    const button = document.querySelector('button');
+    button.addEventListener('click',() => {
+        console.log('You clicked me once, try again , click event will not work!');
+    },{
+        once: true
+    })
+</script>
+</body>
+</html>
