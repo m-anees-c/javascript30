@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Video Speed Controller</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+
+  <div class="wrapper">
+    <video class="flex" width="765" height="430" src="../day11-custom-video-player/652333414.mp4" loop controls poster="../day11-custom-video-player/thumbnail.webp"></video>
+    <div class="speed">
+      <div class="speed-bar">1×</div>
+    </div>
+  </div>
+
+<script>
+    const speed = document.querySelector('.speed');
+    const speedBar = document.querySelector('.speed-bar');
+    const video = document.querySelector('video');
+
+    speed.addEventListener('mousemove', function(e) {
+        let min = 0.5;
+        let max = 4;
+        let y = e.pageY - this.offsetTop;
+        let percent = y / this.offsetHeight ;
+        const height = Math.round(percent * 100) + '%';
+        const playBackRate = percent * (max - min) + min ;
+
+        speedBar.style.height = height;
+        speedBar.textContent = playBackRate.toFixed(2) + 'x';
+
+        video.playbackRate = playBackRate ; 
+    })
+
+</script>
+</body>
+</html>
