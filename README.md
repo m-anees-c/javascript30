@@ -34,4 +34,4 @@ Each project is built using **Vanilla JavaScript**, without frameworks or librar
 27. [Day 27 – Click and Drag](./day27-click-and-drag/)  
 28. [Day 28 – Video Speed Controller](./day28-video-speed-controller/)  
 29. [Day 29 – Countdown Timer](./day29-countdown-timer/)  
-30. [Day 30 – Whack A Mole](./day30-wack-a-mole/)  
+30. [Day 30 – Whack A Mole](./day30-whack-a-mole/)  
